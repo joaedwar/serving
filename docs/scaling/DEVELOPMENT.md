@@ -138,9 +138,12 @@ Revision and establish a websocket connection. Every 1 second, the queue proxy
 pushes a gob serialized struct with the observed number of concurrent requests
 at that moment.
 
+To configure the autoscaler use the `/target` setting. Using `/target` configures the autoscaler to scale, based on an observed amount of concurrent requests to the application.
+Using `containerConcurrency` is only advised if the application needs to have an enforced constraint of concurrency. Using `containerConcurrency` limits the amount of concurrent requests allowed into the application.
+
 The Autoscaler runs a controller which monitors
 ["KPA"](../../pkg/apis/autoscaling/v1alpha1/pa_types.go) resources and monitors
-and scales the embedded object reference via the `/scale` sub-resource.
+and scales the embedded object reference via the `/scale` sub-resource. 
 
 The Autoscaler provides a websocket-enabled Statistics Server. Queue proxies
 send their metrics to the Autoscaler's Statistics Server and the Autoscaler
